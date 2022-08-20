@@ -1,0 +1,3 @@
+/usr/share/logstash/bin
+
+docker cp /mnt/d/elasticsearch/logstash.conf logtash:/usr/share/logstash/bin

@@ -1,0 +1,54 @@
+version: '3.7'
+
+services:
+  Elasticsearch:
+    image: elasticsearch:7.9.2
+    container_name: elasticsearch
+    # volumes:
+    #   - my_elastic_data:/home
+    ports:
+      - '9200:9200'
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      discovery.type: single-node 
+    networks:
+      - elk
+  kibana:
+    image: kibana:7.9.2
+    container_name: kibana
+    ports:
+      - '5601:5601'
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200  
+    depends_on:
+      - Elasticsearch 
+    networks:
+      - elk
+
+  Logstash:
+    image: logstash:7.9.2
+    container_name: logstash
+    # command: cat /etc/logstash/logstash.conf
+    command: logstash -f /etc/logstash/logstash.conf
+    # command: ls /logstash_dir/src_logs
+    volumes:
+      - ./logstash_dir/logstash.conf:/etc/logstash/logstash.conf
+      - ./logstash_dir/src_logs:/logstash_dir/src_logs
+    depends_on:
+      - Elasticsearch
+    ports:
+      - '9600:9600'
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m" 
+    networks:
+      - elk
+# volumes:
+#   my_elastic_data: 
+#     driver_opts:
+#       device: /mnt/d/elasticsearch/data/
+#       o: bind
+#       type: none
+
+networks:
+  elk:
+    driver: bridge
