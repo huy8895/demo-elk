@@ -45,7 +45,7 @@ services:
 volumes:
   my_elastic_data: 
     driver_opts:
-      device: /run/desktop/mnt/host/d/elasticsearch/data
+      device: /run/desktop/mnt/host/d/elasticsearch/data    #thêm /run/desktop/mnt/host để không bị lỗi khi mount -> thự tế khi chạy trên server thi không cần
       o: bind
       type: none
 

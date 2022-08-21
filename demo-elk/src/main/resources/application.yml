@@ -3,7 +3,7 @@ spring:
     name: ELK-STACK-EXAMPLE
 
 server:
-  port: 9898
+  port: 8080
 
 logging:
   file:
