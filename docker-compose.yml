@@ -4,8 +4,8 @@ services:
   Elasticsearch:
     image: elasticsearch:7.9.2
     container_name: elasticsearch
-    # volumes:
-    #   - my_elastic_data:/home
+    volumes:
+      - my_elastic_data:/elasticsearch/data
     ports:
       - '9200:9200'
     environment:
@@ -42,12 +42,12 @@ services:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m" 
     networks:
       - elk
-# volumes:
-#   my_elastic_data: 
-#     driver_opts:
-#       device: /mnt/d/elasticsearch/data/
-#       o: bind
-#       type: none
+volumes:
+  my_elastic_data: 
+    driver_opts:
+      device: /run/desktop/mnt/host/d/elasticsearch/data
+      o: bind
+      type: none
 
 networks:
   elk:
