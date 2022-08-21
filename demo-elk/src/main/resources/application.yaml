@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: ELK-STACK-EXAMPLE
+  profiles:
+    active: ${PROFILES_ACTIVE:}
+
+server:
+  port: 8080
+
+logging:
+  file:
+    name: ${LOGGING_FILE:D:/elasticsearch/logstash_dir/src_logs/elk-stack.log}

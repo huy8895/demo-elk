@@ -42,6 +42,21 @@ services:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m" 
     networks:
       - elk
+
+  springboot:
+    container_name: springboot-demo-elk-V1
+    build:
+      dockerfile: Dockerfile
+      context: ./demo-elk
+    ports:
+      - '8080:8080'
+    networks:
+      - elk
+    volumes:
+      - ./logstash_dir/src_logs:/logs
+    environment:
+      PROFILES_ACTIVE: dev
+#      LOGGING_FILE: /logs/elk-stack.log
 volumes:
   my_elastic_data: 
     driver_opts:

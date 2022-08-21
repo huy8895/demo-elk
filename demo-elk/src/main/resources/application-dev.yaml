@@ -1,0 +1,3 @@
+logging:
+  file:
+    name: ${LOGGING_FILE:/logs/elk-stack.log}
